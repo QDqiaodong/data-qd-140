@@ -1,0 +1,20 @@
+{
+  "capacity": 100,
+  "initial": 20,
+  "max_charge": 200,
+  "max_discharge": 50,
+  "charge_efficiency": {
+    "numerator": 4,
+    "denominator": 5
+  },
+  "discharge_efficiency": {
+    "numerator": 4,
+    "denominator": 5
+  },
+  "requests": [
+    50,
+    -60,
+    -10,
+    200
+  ]
+}

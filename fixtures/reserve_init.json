@@ -1,0 +1,35 @@
+{
+  "capacity": 100,
+  "initial": 10,
+  "charge_efficiency": {
+    "numerator": 4,
+    "denominator": 5
+  },
+  "discharge_efficiency": {
+    "numerator": 4,
+    "denominator": 5
+  },
+  "terminal_min": 0,
+  "slots": [
+    {
+      "charge_limit": 50,
+      "discharge_limit": 0,
+      "price": 1
+    },
+    {
+      "charge_limit": 0,
+      "discharge_limit": 50,
+      "price": 5
+    },
+    {
+      "charge_limit": 0,
+      "discharge_limit": 50,
+      "price": 7
+    },
+    {
+      "charge_limit": 50,
+      "discharge_limit": 0,
+      "price": 2
+    }
+  ]
+}

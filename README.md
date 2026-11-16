@@ -24,8 +24,45 @@ python3 -m venv .venv
 输入和输出不得相同，输出符号链接拒绝。单操作者批处理，不承诺并发发布或断电恢复。
 同输入重跑不累加。测试使用临时目录，运行产物在忽略的run/。
 
+测试覆盖 v1 回放、预约簿规划器（重叠窗口抢占、禁止贪心、同成本规范平局、非整数效率）、
+独立顶点枚举 oracle、SQLite 预约簿（关闭重开、部分交付后取消保留执行事实、请求冲突/回滚、
+提交后导出失败重试）、真实独立进程的两种锁策略竞争与防超售，以及不缩小输入边界的
+192 槽/80 合约非枚举实例：
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
 src/storage_dispatch/model.py 为业务模型，相关算法模块独立组织；common.py 提供受限JSON及报告发布，
 cli.py 衔接数据链路。fixtures 为明确自制样例，代码与样例采用MIT许可。
+
+## 可执行的合约预约簿（v2）
+
+`storage_dispatch.reserve` 为需求响应运营提供可执行的合约预约簿：多份交付窗口重叠的放电合约
+共享同一块电池，由精确 Fraction 线性规划统一决定每槽网侧充电与每合约交付，先最小化购电成本，
+再按槽升序、每槽先充电后按 contract_id ASCII 升序的交付向量取字典序最小规范解。接口与 JSON
+schema 见 [预约簿契约](docs/reservations.md)。仅用 Python 标准库（含 sqlite3）。
+
+```sh
+# 建簿（新库；无合约也必须形成可行计划）
+storage-dispatch reservations --db run/book.db init fixtures/reserve_init.json
+# 新增 / 取消 / 推进，请求体可来自文件或标准输入（-）
+echo '{"request_id":"r1","contract_id":"C-A","start":1,"end":4,"energy":20}' \
+  | storage-dispatch reservations --db run/book.db add -
+storage-dispatch reservations --db run/book.db advance run/advance.json
+storage-dispatch reservations --db run/book.db cancel run/cancel.json
+storage-dispatch reservations --db run/book.db status
+```
+
+并发写有两种等价于某串行序的策略：默认 `external`（锁外求解、提交前按新状态重算，旧解即使仍
+可行也不冒充新最优）与 `transaction`（整段求解持写锁，竞争写入等待/重试），均防止并发超售：
+
+```sh
+storage-dispatch reservations --db run/book.db --strategy transaction add run/add.json
+```
+
+请求按完整原始 UTF-8 JSON 字节摘要幂等：同字节跨进程重试返回原回执，异字节冲突，失败不占用 ID。
+状态、规范计划、执行前缀、revision 与回执在同一 SQLite 事务提交。
 
 ## 当前业务与样例
 # Fixed-slot storage energy accounting v1

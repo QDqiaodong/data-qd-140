@@ -1,0 +1,74 @@
+[
+  {
+    "invoice_id": "INV0",
+    "start": 0,
+    "end": 8,
+    "prices": [
+      1,
+      1,
+      6,
+      5,
+      2,
+      0,
+      4,
+      6
+    ],
+    "window": 2,
+    "demand_rate": 5,
+    "amount": "739"
+  },
+  {
+    "invoice_id": "INV1",
+    "start": 6,
+    "end": 14,
+    "prices": [
+      1,
+      8,
+      8,
+      7,
+      7,
+      2,
+      3,
+      3
+    ],
+    "window": 3,
+    "demand_rate": 2,
+    "amount": "1224"
+  },
+  {
+    "invoice_id": "INV2",
+    "start": 12,
+    "end": 20,
+    "prices": [
+      6,
+      4,
+      8,
+      7,
+      7,
+      2,
+      6,
+      1
+    ],
+    "window": 4,
+    "demand_rate": 7,
+    "amount": "252493/228"
+  },
+  {
+    "invoice_id": "INV3",
+    "start": 16,
+    "end": 24,
+    "prices": [
+      2,
+      2,
+      5,
+      3,
+      5,
+      8,
+      8,
+      2
+    ],
+    "window": 2,
+    "demand_rate": 0,
+    "amount": "66779/171"
+  }
+]

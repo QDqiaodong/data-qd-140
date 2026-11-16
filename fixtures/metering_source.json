@@ -1,0 +1,556 @@
+{
+  "device": {
+    "capacity": 400,
+    "initial": 50,
+    "max_charge": 60,
+    "max_discharge": 55,
+    "charge_efficiency": {
+      "numerator": 19,
+      "denominator": 20
+    },
+    "discharge_efficiency": {
+      "numerator": 9,
+      "denominator": 10
+    },
+    "requests": [
+      99,
+      -13,
+      4,
+      35,
+      -3,
+      69,
+      94,
+      -7,
+      87,
+      93,
+      -29,
+      2,
+      66,
+      -25,
+      91,
+      49,
+      -50,
+      40,
+      7,
+      -23,
+      30,
+      78,
+      -25,
+      86
+    ]
+  },
+  "readings": [
+    {
+      "reading_id": "M00",
+      "channel": "import",
+      "start": 13,
+      "end": 19,
+      "lower": "17866/171",
+      "upper": "17866/171"
+    },
+    {
+      "reading_id": "M01",
+      "channel": "export",
+      "start": 14,
+      "end": 17,
+      "lower": "48",
+      "upper": "53"
+    },
+    {
+      "reading_id": "M02",
+      "channel": "loss",
+      "start": 1,
+      "end": 6,
+      "lower": "851/180",
+      "upper": "1751/180"
+    },
+    {
+      "reading_id": "M03",
+      "channel": "import",
+      "start": 17,
+      "end": 21,
+      "lower": "77",
+      "upper": "77"
+    },
+    {
+      "reading_id": "M04",
+      "channel": "export",
+      "start": 12,
+      "end": 14,
+      "lower": "23",
+      "upper": "28"
+    },
+    {
+      "reading_id": "M05",
+      "channel": "loss",
+      "start": 15,
+      "end": 16,
+      "lower": "0",
+      "upper": "3"
+    },
+    {
+      "reading_id": "M06",
+      "channel": "import",
+      "start": 22,
+      "end": 24,
+      "lower": "5000/171",
+      "upper": "5000/171"
+    },
+    {
+      "reading_id": "M07",
+      "channel": "export",
+      "start": 21,
+      "end": 24,
+      "lower": "23",
+      "upper": "28"
+    },
+    {
+      "reading_id": "M08",
+      "channel": "loss",
+      "start": 4,
+      "end": 6,
+      "lower": "4/3",
+      "upper": "19/3"
+    },
+    {
+      "reading_id": "M09",
+      "channel": "import",
+      "start": 5,
+      "end": 11,
+      "lower": "240",
+      "upper": "240"
+    },
+    {
+      "reading_id": "M10",
+      "channel": "export",
+      "start": 12,
+      "end": 18,
+      "lower": "73",
+      "upper": "78"
+    },
+    {
+      "reading_id": "M11",
+      "channel": "loss",
+      "start": 18,
+      "end": 19,
+      "lower": "0",
+      "upper": "67/20"
+    },
+    {
+      "reading_id": "M12",
+      "channel": "import",
+      "start": 21,
+      "end": 24,
+      "lower": "6433/171",
+      "upper": "6433/171"
+    },
+    {
+      "reading_id": "M13",
+      "channel": "export",
+      "start": 21,
+      "end": 23,
+      "lower": "23",
+      "upper": "28"
+    },
+    {
+      "reading_id": "M14",
+      "channel": "loss",
+      "start": 6,
+      "end": 9,
+      "lower": "43/9",
+      "upper": "88/9"
+    },
+    {
+      "reading_id": "M15",
+      "channel": "import",
+      "start": 7,
+      "end": 12,
+      "lower": "122",
+      "upper": "122"
+    },
+    {
+      "reading_id": "M16",
+      "channel": "export",
+      "start": 4,
+      "end": 10,
+      "lower": "8",
+      "upper": "13"
+    },
+    {
+      "reading_id": "M17",
+      "channel": "loss",
+      "start": 16,
+      "end": 20,
+      "lower": "1523/180",
+      "upper": "2423/180"
+    },
+    {
+      "reading_id": "M18",
+      "channel": "import",
+      "start": 2,
+      "end": 5,
+      "lower": "39",
+      "upper": "39"
+    },
+    {
+      "reading_id": "M19",
+      "channel": "export",
+      "start": 15,
+      "end": 21,
+      "lower": "71",
+      "upper": "76"
+    },
+    {
+      "reading_id": "M20",
+      "channel": "loss",
+      "start": 4,
+      "end": 6,
+      "lower": "4/3",
+      "upper": "19/3"
+    },
+    {
+      "reading_id": "M21",
+      "channel": "import",
+      "start": 6,
+      "end": 10,
+      "lower": "180",
+      "upper": "180"
+    },
+    {
+      "reading_id": "M22",
+      "channel": "export",
+      "start": 17,
+      "end": 21,
+      "lower": "21",
+      "upper": "26"
+    },
+    {
+      "reading_id": "M23",
+      "channel": "loss",
+      "start": 11,
+      "end": 15,
+      "lower": "7697/1140",
+      "upper": "13397/1140"
+    },
+    {
+      "reading_id": "M24",
+      "channel": "import",
+      "start": 19,
+      "end": 23,
+      "lower": "6563/171",
+      "upper": "6563/171"
+    },
+    {
+      "reading_id": "M25",
+      "channel": "export",
+      "start": 19,
+      "end": 22,
+      "lower": "21",
+      "upper": "26"
+    },
+    {
+      "reading_id": "M26",
+      "channel": "loss",
+      "start": 18,
+      "end": 22,
+      "lower": "161/57",
+      "upper": "446/57"
+    },
+    {
+      "reading_id": "M27",
+      "channel": "import",
+      "start": 19,
+      "end": 22,
+      "lower": "6563/171",
+      "upper": "6563/171"
+    },
+    {
+      "reading_id": "M28",
+      "channel": "export",
+      "start": 12,
+      "end": 18,
+      "lower": "73",
+      "upper": "78"
+    },
+    {
+      "reading_id": "M29",
+      "channel": "loss",
+      "start": 11,
+      "end": 17,
+      "lower": "42091/3420",
+      "upper": "59191/3420"
+    },
+    {
+      "reading_id": "M30",
+      "channel": "import",
+      "start": 11,
+      "end": 14,
+      "lower": "62",
+      "upper": "62"
+    },
+    {
+      "reading_id": "M31",
+      "channel": "export",
+      "start": 13,
+      "end": 15,
+      "lower": "23",
+      "upper": "28"
+    },
+    {
+      "reading_id": "M32",
+      "channel": "loss",
+      "start": 11,
+      "end": 16,
+      "lower": "7697/1140",
+      "upper": "13397/1140"
+    },
+    {
+      "reading_id": "M33",
+      "channel": "import",
+      "start": 14,
+      "end": 17,
+      "lower": "9829/171",
+      "upper": "9829/171"
+    },
+    {
+      "reading_id": "M34",
+      "channel": "export",
+      "start": 5,
+      "end": 10,
+      "lower": "5",
+      "upper": "10"
+    },
+    {
+      "reading_id": "M35",
+      "channel": "loss",
+      "start": 5,
+      "end": 9,
+      "lower": "70/9",
+      "upper": "115/9"
+    },
+    {
+      "reading_id": "M36",
+      "channel": "import",
+      "start": 3,
+      "end": 6,
+      "lower": "95",
+      "upper": "95"
+    },
+    {
+      "reading_id": "M37",
+      "channel": "export",
+      "start": 4,
+      "end": 8,
+      "lower": "8",
+      "upper": "13"
+    },
+    {
+      "reading_id": "M38",
+      "channel": "loss",
+      "start": 2,
+      "end": 4,
+      "lower": "0",
+      "upper": "99/20"
+    },
+    {
+      "reading_id": "M39",
+      "channel": "import",
+      "start": 9,
+      "end": 11,
+      "lower": "60",
+      "upper": "60"
+    },
+    {
+      "reading_id": "M40",
+      "channel": "export",
+      "start": 6,
+      "end": 11,
+      "lower": "34",
+      "upper": "39"
+    },
+    {
+      "reading_id": "M41",
+      "channel": "loss",
+      "start": 8,
+      "end": 14,
+      "lower": "131/10",
+      "upper": "181/10"
+    },
+    {
+      "reading_id": "M42",
+      "channel": "import",
+      "start": 21,
+      "end": 23,
+      "lower": "1433/171",
+      "upper": "1433/171"
+    },
+    {
+      "reading_id": "M43",
+      "channel": "export",
+      "start": 3,
+      "end": 4,
+      "lower": "0",
+      "upper": "3"
+    },
+    {
+      "reading_id": "M44",
+      "channel": "loss",
+      "start": 12,
+      "end": 18,
+      "lower": "48589/3420",
+      "upper": "65689/3420"
+    },
+    {
+      "reading_id": "M45",
+      "channel": "import",
+      "start": 21,
+      "end": 24,
+      "lower": "6433/171",
+      "upper": "6433/171"
+    },
+    {
+      "reading_id": "M46",
+      "channel": "export",
+      "start": 7,
+      "end": 9,
+      "lower": "5",
+      "upper": "10"
+    },
+    {
+      "reading_id": "M47",
+      "channel": "loss",
+      "start": 11,
+      "end": 14,
+      "lower": "349/90",
+      "upper": "799/90"
+    },
+    {
+      "reading_id": "M48",
+      "channel": "import",
+      "start": 6,
+      "end": 11,
+      "lower": "180",
+      "upper": "180"
+    },
+    {
+      "reading_id": "M49",
+      "channel": "export",
+      "start": 22,
+      "end": 24,
+      "lower": "23",
+      "upper": "28"
+    },
+    {
+      "reading_id": "M50",
+      "channel": "loss",
+      "start": 8,
+      "end": 11,
+      "lower": "65/9",
+      "upper": "110/9"
+    },
+    {
+      "reading_id": "M51",
+      "channel": "import",
+      "start": 10,
+      "end": 14,
+      "lower": "62",
+      "upper": "62"
+    },
+    {
+      "reading_id": "M52",
+      "channel": "export",
+      "start": 13,
+      "end": 19,
+      "lower": "73",
+      "upper": "78"
+    },
+    {
+      "reading_id": "M53",
+      "channel": "loss",
+      "start": 18,
+      "end": 19,
+      "lower": "0",
+      "upper": "67/20"
+    },
+    {
+      "reading_id": "M54",
+      "channel": "import",
+      "start": 19,
+      "end": 23,
+      "lower": "6563/171",
+      "upper": "6563/171"
+    },
+    {
+      "reading_id": "M55",
+      "channel": "export",
+      "start": 4,
+      "end": 10,
+      "lower": "8",
+      "upper": "13"
+    },
+    {
+      "reading_id": "M56",
+      "channel": "loss",
+      "start": 17,
+      "end": 19,
+      "lower": "7/20",
+      "upper": "107/20"
+    },
+    {
+      "reading_id": "M57",
+      "channel": "import",
+      "start": 9,
+      "end": 14,
+      "lower": "122",
+      "upper": "122"
+    },
+    {
+      "reading_id": "M58",
+      "channel": "export",
+      "start": 21,
+      "end": 22,
+      "lower": "0",
+      "upper": "3"
+    },
+    {
+      "reading_id": "M59",
+      "channel": "loss",
+      "start": 8,
+      "end": 11,
+      "lower": "65/9",
+      "upper": "110/9"
+    },
+    {
+      "reading_id": "M60",
+      "channel": "import",
+      "start": 18,
+      "end": 21,
+      "lower": "37",
+      "upper": "37"
+    },
+    {
+      "reading_id": "M61",
+      "channel": "export",
+      "start": 15,
+      "end": 16,
+      "lower": "0",
+      "upper": "3"
+    },
+    {
+      "reading_id": "M62",
+      "channel": "loss",
+      "start": 21,
+      "end": 24,
+      "lower": "3031/1140",
+      "upper": "8731/1140"
+    },
+    {
+      "reading_id": "M63",
+      "channel": "import",
+      "start": 21,
+      "end": 24,
+      "lower": "6433/171",
+      "upper": "6433/171"
+    }
+  ]
+}

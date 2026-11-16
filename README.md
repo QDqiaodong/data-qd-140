@@ -64,6 +64,25 @@ storage-dispatch reservations --db run/book.db --strategy transaction add run/ad
 请求按完整原始 UTF-8 JSON 字节摘要幂等：同字节跨进程重试返回原回执，异字节冲突，失败不占用 ID。
 状态、规范计划、执行前缀、revision 与回执在同一 SQLite 事务提交。
 
+## 相关计量与联合票额稽核（metering）
+
+`storage_dispatch.metering` 为储能运营数据核账提供“相关计量与联合票额稽核”：输入是已经发生的电表
+观测（至多 64 项，1..24 槽）与已经开出的账单（至多 4 张票），在一个由设备限额、双向效率、SOC 耦合
+与全部观测共同定义的**完整有理可行域**上做精确 LP 判定与票额反演。不读取预约簿、不把计划/合约当
+计量事实、不执行设备控制；方向/效率/SOC 契约与 v1 回放共用 `physics.py`，仅复用通用精确 LP 引擎，
+不把未来调度规划器当计量曲线。Schema、API、状态机与错误边界见
+[计量稽核契约](docs/metering.md)。
+
+```sh
+storage-dispatch metering ingest --db run/metering.db --source fixtures/metering_source.json
+storage-dispatch metering audit  --db run/metering.db --dataset <SHA256> \
+    --invoices fixtures/metering_invoices.json --output run/audit.json
+```
+
+状态为 `possible` / `impossible` / `inconsistent`；正需量费的峰值必须被真实窗口达到（自由 peak
+反例会被拒绝），联合结论要求同一条全槽曲线同时满足全部票额等式，冲突报告给出极小集合与逐个移除
+后的全槽见证。数据库审计连接只读，失败退出 2 且保留旧输出，拒绝同路径与符号链接输出。
+
 ## 当前业务与样例
 # Fixed-slot storage energy accounting v1
 

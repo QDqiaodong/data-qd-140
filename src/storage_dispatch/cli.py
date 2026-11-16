@@ -8,6 +8,7 @@ from .common import read, save
 from .model import analyze
 from .reserve import ReservationBook, BookError
 from .reserve.validate import RequestError, Conflict, parse_json
+from .metering.cli import run_metering, add_metering_parser, METERING_FAILURES
 
 
 def run(source):
@@ -63,6 +64,8 @@ def _build_parser():
                                         'status'))
     res.add_argument('request', nargs='?', default='-',
                      help='request JSON file (- for stdin); ignored by status')
+
+    add_metering_parser(sub)
     return parser
 
 
@@ -79,6 +82,13 @@ def main(argv=None):
     if args.command == 'replay':
         return _run_legacy(['--source', str(args.source),
                             '--output', str(args.output)])
+
+    if args.command == 'metering':
+        try:
+            return run_metering(args)
+        except METERING_FAILURES as error:
+            print(str(error), file=sys.stderr)
+            return 2
 
     try:
         return _run_reservation(args)

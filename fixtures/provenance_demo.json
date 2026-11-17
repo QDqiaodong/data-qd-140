@@ -1,0 +1,52 @@
+{
+  "buses": ["U", "V"],
+  "devices": [
+    {
+      "device_id": "A",
+      "bus": "U",
+      "device": {
+        "capacity": 100,
+        "initial": 4,
+        "max_charge": 100,
+        "max_discharge": 100,
+        "charge_efficiency": {"numerator": 1, "denominator": 1},
+        "discharge_efficiency": {"numerator": 1, "denominator": 2},
+        "requests": [-2, 0]
+      },
+      "initial_origins": {"R": "4"}
+    },
+    {
+      "device_id": "B",
+      "bus": "V",
+      "device": {
+        "capacity": 100,
+        "initial": 0,
+        "max_charge": 100,
+        "max_discharge": 100,
+        "charge_efficiency": {"numerator": 1, "denominator": 2},
+        "discharge_efficiency": {"numerator": 1, "denominator": 1},
+        "requests": [4, -2]
+      },
+      "initial_origins": {"R": "0"}
+    }
+  ],
+  "frames": [
+    {
+      "injections": [
+        {"source_id": "B", "bus": "U", "energy": "2"}
+      ],
+      "links": [
+        {"link_id": "U-to-V", "from_bus": "U", "to_bus": "V", "sent": "14", "efficiency": "1"},
+        {"link_id": "V-to-U", "from_bus": "V", "to_bus": "U", "sent": "10", "efficiency": "1"}
+      ],
+      "sinks": []
+    },
+    {
+      "injections": [],
+      "links": [],
+      "sinks": [
+        {"sink_id": "terminal-1", "bus": "V", "energy": "2"}
+      ]
+    }
+  ]
+}

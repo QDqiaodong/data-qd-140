@@ -83,6 +83,49 @@ storage-dispatch metering audit  --db run/metering.db --dataset <SHA256> \
 反例会被拒绝），联合结论要求同一条全槽曲线同时满足全部票额等式，冲突报告给出极小集合与逐个移除
 后的全槽见证。数据库审计连接只读，失败退出 2 且保留旧输出，拒绝同路径与符号链接输出。
 
+## 多电池供能来源追溯（provenance）
+
+`storage-dispatch provenance` 回答每个来源的能量最终送给了谁、损耗在哪里、还存在何处。输入严格为
+`{buses, devices, frames}`（1..32 母线、1..16 设备、1..256 槽、至多 64 来源、每槽至多 64 注入/
+128 链路/64 终端），全部能量为规范 Fraction 字符串，仅用标准库精确求解，不读取预约簿、计量库或账单，
+不求最优计划，也不推断未知电表读数。Schema、输出与异常的完整定义见
+[来源追溯契约](docs/provenance.md)。
+
+```sh
+storage-dispatch provenance --source fixtures/provenance_demo.json \
+    --output run/provenance_report.json
+```
+
+也可在代码中独立调用批量 API（严格 JSON 字节进、含源字节 SHA256 的完整报告出），或逐槽
+`TraceSession(document).feed(frame)` 后 `finish()`：
+
+```python
+from storage_dispatch.provenance import trace_provenance, TraceSession
+report = trace_provenance(raw_bytes)
+
+session = TraceSession(document)
+for frame in document["frames"]:
+    session.feed(frame)          # 失败不改变任何设备状态、来源库存或槽号，可修正后重试
+report = session.finish()        # 仅在全部槽成功后允许调用
+```
+
+逐槽物理步进抽自 v1（`physics.step_request`），v1 回放与 TraceSession 共用同一方向判断、限额与
+SOC 饱和裁剪，接受量与损耗不可能出现两套结果；电池另维护按来源的内部库存，其和始终精确等于物理
+SOC。母线每槽无库存、完全混合，含环网络按同槽共同混合状态联立精确 Gauss–Jordan（Fraction，无浮点、
+无拓扑丢边、无迭代收敛），矩阵奇异即正流量闭环无可到达来源，报 `ambiguous_origin`；能量不平衡先报
+`unbalanced`。逐槽全部计算在局部副本上完成，只有整槽成功才提交 SOC 与来源库存，因此失败 feed 不污染
+状态。长轨迹可用 `TraceSession(document, retain_slots=False)` 流式处理：每槽报告由 `feed` 返回后即
+可消费丢弃，`finish` 仅回汇总，内存占用不随槽数增长。每个来源满足
+`初始量 + 外部注入 = 终端交付 + 链路及转换损耗 + 末库存`，残差恰为 0，循环吞吐不重复累计。
+
+不缩小输入边界的可执行样例（32 母线/16 设备/64 来源/128 链路/256 槽，含损环路与接近 1 的分数
+效率）由生成器构造并在测试中自动验收：
+
+```sh
+PYTHONPATH=src python3 tools/provenance_sample.py run/provenance_input.json \
+    run/provenance_full_report.json
+```
+
 ## 当前业务与样例
 # Fixed-slot storage energy accounting v1
 

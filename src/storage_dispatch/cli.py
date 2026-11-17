@@ -9,12 +9,22 @@ from .model import analyze
 from .reserve import ReservationBook, BookError
 from .reserve.validate import RequestError, Conflict, parse_json
 from .metering.cli import run_metering, add_metering_parser, METERING_FAILURES
+from .provenance import trace_provenance, ProvenanceError
 
 
 def run(source):
     data, digest = read(source)
     return {'schema_version': 1, 'source_sha256': digest,
             'result': analyze(data)}
+
+
+def run_provenance(source):
+    """Read at most 8 MB of strict JSON and run the provenance trace."""
+    with Path(source).open('rb') as stream:
+        raw = stream.read(8_000_001)
+    if len(raw) > 8_000_000:
+        raise ValueError('JSON exceeds 8 MB')
+    return trace_provenance(raw)
 
 
 def _read_request(path):
@@ -66,6 +76,12 @@ def _build_parser():
                      help='request JSON file (- for stdin); ignored by status')
 
     add_metering_parser(sub)
+
+    provenance = sub.add_parser(
+        'provenance',
+        help='multi-battery energy-source provenance tracing')
+    provenance.add_argument('--source', type=Path, required=True)
+    provenance.add_argument('--output', type=Path, required=True)
     return parser
 
 
@@ -89,6 +105,24 @@ def main(argv=None):
         except METERING_FAILURES as error:
             print(str(error), file=sys.stderr)
             return 2
+
+    if args.command == 'provenance':
+        try:
+            if args.source.resolve() == args.output.resolve():
+                raise ValueError('input and output must differ')
+            if args.output.is_symlink():
+                raise ValueError('output cannot be a symlink')
+            report = run_provenance(args.source)
+            save(args.output, report)
+        except (ProvenanceError, ValueError, TypeError, KeyError,
+                OSError, OverflowError) as error:
+            print(str(error), file=sys.stderr)
+            return 2
+        print(json.dumps({'schema_version': report['schema_version'],
+                          'source_sha256': report['source_sha256'],
+                          'output': str(args.output)}, sort_keys=True,
+                         ensure_ascii=False, allow_nan=False))
+        return 0
 
     try:
         return _run_reservation(args)
